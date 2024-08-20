@@ -1,8 +1,8 @@
 @extends('layouts.base')
 
-@section('body')
+@section('base-body')
     @yield('content')
-    
+
     @isset($slot)
         {{ $slot }}
     @endisset

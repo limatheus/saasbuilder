@@ -15,6 +15,7 @@
 
         <!-- Fonts -->
         <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+        <link href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css" rel="stylesheet">
 
         @vite(['resources/sass/app.scss', 'resources/js/app.js'])
         @livewireStyles
@@ -24,7 +25,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
     </head>
 
-    <body>
-        @yield('body')
+    <body class="text-slate-500">
+        @yield('base-body')
     </body>
 </html>
