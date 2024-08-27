@@ -1,78 +1,81 @@
+
+
 @section('title', 'Sign in to your account')
 
-<div>
-    <div class="sm:mx-auto sm:w-full sm:max-w-md">
-        <a href="{{ route('home') }}">
-            <x-logo class="w-auto h-16 mx-auto text-indigo-600" />
-        </a>
-
-        <h2 class="mt-6 text-3xl font-extrabold text-center text-gray-900 leading-9">
-            Sign in to your account
-        </h2>
-        @if (Route::has('register'))
-            <p class="mt-2 text-sm text-center text-gray-600 leading-5 max-w">
-                Or
-                <a href="{{ route('register') }}" class="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150">
-                    create a new account
-                </a>
-            </p>
-        @endif
-    </div>
-
-    <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div class="px-4 py-8 bg-white shadow sm:rounded-lg sm:px-10">
-            <form wire:submit.prevent="authenticate">
-                <div>
-                    <label for="email" class="block text-sm font-medium text-gray-700 leading-5">
-                        Email address
-                    </label>
-
-                    <div class="mt-1 rounded-md shadow-sm">
-                        <input wire:model.lazy="email" id="email" name="email" type="email" required autofocus class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 @error('email') border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:ring-red @enderror" />
-                    </div>
-
-                    @error('email')
-                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
-                    @enderror
-                </div>
-
-                <div class="mt-6">
-                    <label for="password" class="block text-sm font-medium text-gray-700 leading-5">
-                        Password
-                    </label>
-
-                    <div class="mt-1 rounded-md shadow-sm">
-                        <input wire:model.lazy="password" id="password" type="password" required class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 @error('password') border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:ring-red @enderror" />
-                    </div>
-
-                    @error('password')
-                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
-                    @enderror
-                </div>
-
-                <div class="flex items-center justify-between mt-6">
-                    <div class="flex items-center">
-                        <input wire:model.lazy="remember" id="remember" type="checkbox" class="form-checkbox w-4 h-4 text-indigo-600 transition duration-150 ease-in-out" />
-                        <label for="remember" class="block ml-2 text-sm text-gray-900 leading-5">
-                            Remember
-                        </label>
-                    </div>
-
-                    <div class="text-sm leading-5">
-                        <a href="{{ route('password.request') }}" class="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150">
-                            Forgot your password?
-                        </a>
-                    </div>
-                </div>
-
-                <div class="mt-6">
-                    <span class="block w-full rounded-md shadow-sm">
-                        <button type="submit" class="flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:ring-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
-                            Sign in
-                        </button>
-                    </span>
-                </div>
-            </form>
+<div class="grid grid-cols-12 gap-y-7 sm:gap-7 card px-4 sm:px-10 2xl:px-[70px] py-15 lg:items-center lg:min-h-[calc(100vh_-_32px)]">
+    <!-- Start Overview Area -->
+    <div class="col-span-full lg:col-span-6">
+        <div class="flex flex-col items-center justify-center gap-10 text-center">
+            <div class="hidden sm:block">
+                <img src="assets/images/loti/loti-auth.svg" alt="loti" class="group-data-[theme-mode=dark]:hidden">
+                <img src="assets/images/loti/loti-auth-dark.svg" alt="loti" class="group-data-[theme-mode=light]:hidden">
+            </div>
+            <div>
+                <h3 class="text-xl md:text-[28px] leading-none font-semibold text-heading">
+                    Welcome back!
+                </h3>
+                <p class="font-medium text-gray-500 dark:text-dark-text mt-4 px-[10%]">
+                    Whether you're launching a stunning online store  optimizing your our object-oriented
+                </p>
+            </div>
         </div>
     </div>
+    <!-- End Overview Area -->
+
+    <!-- Start Form Area -->
+    <div class="col-span-full lg:col-span-6 w-full lg:max-w-[600px]">
+        <div class="border border-form dark:border-dark-border p-5 md:p-10 rounded-20 md:rounded-30">
+            <h3 class="text-xl md:text-[28px] leading-none font-semibold text-heading">
+                Sign In
+            </h3>
+            <p class="font-medium text-gray-500 dark:text-dark-text mt-4">
+                Welcome Back! Log in to your account
+            </p>
+            <form wire:submit.prevent="authenticate" class="leading-none mt-8">
+                <div class="mb-2.5">
+                    <label for="email" class="form-label">Email</label>
+                    <input wire:model.lazy="email" type="email" id="email" placeholder="Your e-mail" required class="form-input @error('email') form-input-error @enderror">
+                    @error('email')
+                    <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+                    @enderror
+                </div>
+                <div class="mt-5">
+                    <label for="password" class="form-label">Password</label>
+                    <div class="relative">
+                        <input wire:model.lazy="password" type="password" id="password" placeholder="Password" required class="form-input px-4 py-3.5 rounded-lg">
+                        <label for="toggleInputType" class="size-8 rounded-md flex-center hover:bg-gray-200 dark:hover:bg-dark-icon foucs:bg-gray-200 dark:foucs:bg-dark-icon position-center left-[95%]">
+                            <input type="checkbox" id="toggleInputType" class="inputTypeToggle peer/it hidden" hidden>
+                            <i class="ri-eye-off-line text-gray-500 dark:text-dark-text peer-checked/it:before:content-['\ecb5']"></i>
+                        </label>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between mt-3 mb-7">
+                    <div class="flex items-center gap-1 select-none">
+                        <input type="checkbox" name="remember-me" id="rememberMe">
+                        <label for="rememberMe" class="font-spline_sans text-sm leading-none text-gray-900 dark:text-dark-text cursor-pointer">Remember Me</label>
+                    </div>
+                    <a href="{{route('password.request')}}" class="text-xs leading-none text-primary-500 font-semibold">Forgot password?</a>
+                </div>
+                <!-- Submit Button -->
+                <button type="submit" class="btn b-solid btn-primary-solid w-full">Sign In</button>
+            </form>
+            <div class="font-spline_sans text-gray-900 dark:text-dark-text leading-none text-center my-4">OR</div>
+            <div class="flex items-center flex-col xl:flex-row gap-4 2xl:gap-5">
+                <a href="#" class="btn b-outline-static btn-disable-outline w-full grow xl:w-auto">
+                    <img src="assets/images/icons/google.svg" alt="icon">
+                    <span class="shrink-0">Sign in with Google</span>
+                </a>
+                <a href="#" class="btn b-outline-static btn-disable-outline w-full grow xl:w-auto">
+                    <img src="assets/images/icons/apple.svg" alt="icon" class="dark:brightness-[3]">
+                    <span class="shrink-0">Continue with Apple</span>
+                </a>
+            </div>
+            <div class="text-gray-900 dark:text-dark-text font-medium leading-none mt-5">
+                Don’t have an account yet?
+                <a href="{{route('register')}}" class="text-primary-500 font-semibold">Sign Up</a>
+            </div>
+        </div>
+    </div>
+    <!-- End Form Area -->
 </div>
+

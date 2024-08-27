@@ -1,31 +1,44 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        @hasSection('title')
+<html lang="en" class="group" data-sidebar-size="lg" data-theme-mode="light">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    @hasSection('title')
 
-            <title>@yield('title') - {{ config('app.name') }}</title>
-        @else
-            <title>{{ config('app.name') }}</title>
-        @endif
+        <title>@yield('title') - {{ config('app.name') }}</title>
+    @else
+        <title>{{ config('app.name') }}</title>
+    @endif
+    <meta name="robots" content="noindex, follow">
+    <meta name="description" content="web development agency">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <!-- Favicon -->
-		<link rel="shortcut icon" href="{{ url(asset('favicon.ico')) }}">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{{ url(asset('favicon.ico')) }}">
 
-        <!-- Fonts -->
-        <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
-        <link href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css" rel="stylesheet">
+    <!-- Style CSS -->
+    @vite(['resources/sass/app.scss', 'resources/js/app.js',  'resources/js/theme/layout.js', 'resources/js/theme/main.js'])
 
-        @vite(['resources/sass/app.scss', 'resources/js/app.js'])
-        @livewireStyles
-        @livewireScripts
+    @livewireStyles
+    @livewireScripts
 
-        <!-- CSRF Token -->
-        <meta name="csrf-token" content="{{ csrf_token() }}">
-    </head>
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+</head>
+<body class="bg-body-light dark:bg-dark-body">
+<div id="loader" class="w-screen h-screen flex-center bg-white dark:bg-dark-card fixed inset-0 z-[9999]">
+    <img src="assets/images/dot-loader.gif" alt="loader">
+</div>
 
-    <body class="text-slate-500">
-        @yield('base-body')
-    </body>
+<div
+    class="main-content m-4">
+    @yield('content')
+</div>
+<!-- End Main Content -->
+
+<script src="assets/js/vendor/jquery.min.js"></script>
+<script src="assets/js/vendor/flowbite.min.js"></script>
+<script src="assets/js/vendor/smooth-scrollbar/smooth-scrollbar.min.js"></script>
+<script src="assets/js/component/app-menu-bar.js"></script>
+</body>
 </html>

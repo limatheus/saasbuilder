@@ -166,14 +166,14 @@
                         class="text-gray-500 dark:text-dark-text flex items-center gap-2 sm:pr-4 relative after:absolute after:right-0 after:font-remix after:content-['\ea4e'] after:text-[18px] after:hidden sm:after:block">
                     <img src="assets/images/user/profile-img.png" alt="user-img" class="size-7 sm:size-9 rounded-50">
                     <span
-                        class="font-semibold leading-none text-lg capitalize hidden sm:block">{{auth()->user()->name}}</span>
+                        class="font-semibold leading-none text-lg capitalize hidden sm:block">{{auth()->user()->first_name}}</span>
                 </button>
                 <!-- Dropdown menu -->
                 <div id="dropdownProfile"
                      class="invisible z-backdrop bg-white text-left divide-y divide-gray-100 rounded-lg shadow w-48 dark:bg-dark-card-shade dark:divide-dark-border-four">
                     <div class="px-4 py-3 text-sm text-gray-500 dark:text-white">
-                        <div class="font-medium ">Alex Janson</div>
-                        <div class="truncate">alex2425@gmail.com</div>
+                        <div class="font-medium ">{{auth()->user()->full_name}}</div>
+                        <div class="truncate">{{auth()->user()->email}}</div>
                     </div>
                     <ul class="py-2 text-sm text-gray-700 dark:text-gray-200">
                         <li>

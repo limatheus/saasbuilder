@@ -106,6 +106,26 @@ module.exports = {
                     },
                 },
             },
+            borderWidth: {
+                DEFAULT: '1px',
+                '0': '0',
+                '1.5': '1.5px',
+                '2': '2px',
+                '3': '3px',
+                '4': '4px',
+                '6': '6px',
+                '8': '8px',
+            },
+            ringWidth: {
+                DEFAULT: '1px',
+                '0': '0',
+                '1.5': '1.5px',
+                '2': '2px',
+                '3': '3px',
+                '4': '4px',
+                '6': '6px',
+                '8': '8px',
+            },
             borderRadius: {
                 10: "10px",
                 15: "15px",
@@ -175,6 +195,9 @@ module.exports = {
     variants: {
         extend: {
             backgroundColor: ['active'],
+            borderColor:['group-focus'],
+            ringColor:['group-focus'],
+            textColor:['group-focus'],
         }
     },
     content: [

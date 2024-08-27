@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\UserStatus;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -23,12 +24,21 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        $first_name = $this->faker->firstName;
+        $last_name = $this->faker->lastName;
+        $timezone = \App\Models\Timezone::where('value', 'America/Sao_Paulo')->first();
+
+
         return [
-            'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
+            'first_name' =>$first_name,
+            'last_name' => $last_name,
+            'email' => preg_replace("/[^a-zA-Z]/", "", strtolower($first_name)).'.'.preg_replace("/[^a-zA-Z]/", "", strtolower($last_name)).'@'.env('APP_DOMAIN'),
             'email_verified_at' => now(),
-            'password' => static::$password ??= Hash::make('password'),
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),
+            'locale' => \LaravelLocalization::getCurrentLocale(),
+            'timezone_id' => $timezone->id,
+            'status' =>$this->faker->randomElement(array_column(UserStatus::cases(), 'value')),
         ];
     }
 

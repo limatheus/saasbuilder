@@ -24,38 +24,56 @@ use Illuminate\Support\Facades\Route;
 foreach (config('tenancy.central_domains') as $domain) {
     Route::domain($domain)->group(function () {
         Route::view('/', 'welcome')->name('home');
+
+        Route::middleware('guest')->group(function () {
+            Route::get('login', Login::class)
+                ->name('login');
+
+            Route::get('register', Register::class)
+                ->name('register');
+        });
+
+        Route::get('password/reset', Email::class)
+            ->name('password.request');
+
+        Route::get('password/reset/{token}', Reset::class)
+            ->name('password.reset');
+
+        Route::middleware('auth')->group(function () {
+            Route::get('email/verify', Verify::class)
+                ->middleware('throttle:6,1')
+                ->name('verification.notice');
+
+            Route::get('password/confirm', Confirm::class)
+                ->name('password.confirm');
+        });
+
+        Route::middleware('auth')->group(function () {
+            Route::get('email/verify/{id}/{hash}', EmailVerificationController::class)
+                ->middleware('signed')
+                ->name('verification.verify');
+
+            Route::post('logout', LogoutController::class)
+                ->name('logout');
+        });
     });
 
-    Route::middleware('guest')->group(function () {
-        Route::get('login', Login::class)
-            ->name('login');
 
-        Route::get('register', Register::class)
-            ->name('register');
-    });
+    Route::get('teste', function () {
 
-    Route::get('password/reset', Email::class)
-        ->name('password.request');
+        $tenant = \App\Models\Tenant::find('omega');
 
-    Route::get('password/reset/{token}', Reset::class)
-        ->name('password.reset');
+        $user = $tenant->run(function ($tenant) {
+            return \App\Models\User::first();
+        });
 
-    Route::middleware('auth')->group(function () {
-        Route::get('email/verify', Verify::class)
-            ->middleware('throttle:6,1')
-            ->name('verification.notice');
+        $token = tenancy()->impersonate($tenant, $user->id, tenant_route($tenant->id . '.' . env('APP_DOMAIN'), 'tenant.dashboard.index'));
 
-        Route::get('password/confirm', Confirm::class)
-            ->name('password.confirm');
-    });
+        $domain = 'http://' . $tenant->id . '.' . env('APP_DOMAIN');
 
-    Route::middleware('auth')->group(function () {
-        Route::get('email/verify/{id}/{hash}', EmailVerificationController::class)
-            ->middleware('signed')
-            ->name('verification.verify');
+        return redirect("{$domain}" . "/impersonate/{$token->token}");
 
-        Route::post('logout', LogoutController::class)
-            ->name('logout');
+        //return redirect(tenant_route($tenant->id.'.'.env('APP_DOMAIN'), 'tenant.impersonate'),['token' => $token->token] );
     });
 
 }

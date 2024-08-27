@@ -60,9 +60,9 @@
         @apply leading-none text-sm text-gray-500 dark:text-dark-text font-medium mb-2.5 inline-block;
     }
 
-    .form-input {
+    /*.form-input {
         @apply font-spline_sans bg-transparent border border-input-border dark:border-dark-border text-gray-500 dark:text-dark-text text-sm rounded-lg focus:border-primary-500 block w-full h-11 p-3 dark:placeholder-gray-400 outline-none;
-    }
+    }*/
 
     .form-select {
         @apply font-urbanist text-base text-gray-900 font-semibold border-gray-200 dark:border-dark-border w-32 h-9 py-0 rounded-md appearance-none bg-transparent bg-[url('../../assets/images/icons/dw-arr.svg')] bg-no-repeat bg-[center_right_0.75rem] shrink-0;
@@ -76,9 +76,9 @@
         @apply bg-calendar bg-[length:18px_16px];
     }
 
-    .form-input-group {
+    /*.form-input-group {
         @apply form-input [&.input-icon]:border-e-0 [&.input-icon]:w-auto [&.input-icon]:text-primary-400 [&.input-icon]:px-4 [&.input-icon]:rounded-r-none [&.input-icon]:flex-center;
-    }
+    }*/
 
     .range-input {
         @apply w-full h-4 absolute opacity-0 appearance-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:size-[18px] [&::-webkit-slider-thumb]:cursor-pointer;
@@ -672,3 +672,16 @@
         @apply fill-dark-text;
     }
 }
+
+.form-control, .form-input {
+    @apply block w-full dark:bg-dark-body border border-slate-200 dark:border-dark-border text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500  py-3 px-4 pe-11 placeholder-slate-400 dark:placeholder-slate-300 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500;
+}
+
+.form-control-group, .form-input-group {
+    @apply flex-shrink flex-grow flex-auto w-px dark:bg-dark-body border border-slate-200 dark:border-dark-border text-sm rounded-lg rounded-r-none px-3 relative focus:ring-primary-500 focus:border-primary-500  py-3 px-4 pe-11 placeholder-slate-400 dark:placeholder-slate-300 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500;
+}
+.form-control-error, .form-input-error {
+     @apply border-red-500 dark:border-red-500 dark:bg-dark-body rounded-lg placeholder-red-400 dark:placeholder-red-400 focus:outline-none focus:ring-red-500 dark:ring-red-500 focus:border-red-500 dark:focus:border-red-500 text-red-500 dark:text-red-500;
+ }
+
+
