@@ -20,3 +20,10 @@ if (!function_exists('generateNanoId')) {
         return $prefix . $client->generateId($length, Client::MODE_DYNAMIC);
     }
 }
+
+if (!function_exists('isImpersonated')) {
+    function isImpersonated()
+    {
+        return (bool) request()->cookie('impersonator_id');
+    }
+}

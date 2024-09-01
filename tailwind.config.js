@@ -23,13 +23,13 @@ module.exports = {
             colors: {
                 "body-light": "#F3F3F3",
                 heading: "#251F47",
-                primary: {
-                    100: "#E5DEFF",
-                    200: "#F2ECFE",
-                    300: "#B39EF9",
-                    400: "#9C84F4",
-                    500: "#795DED",
-                    600: "#5B43CB",
+                'primary': {
+                    '100': '#DFF7F7',
+                    '200': '#B2EDED',
+                    '300': '#87E0E0',
+                    '400': '#3DCCCC',
+                    '500': '#00b5b5',
+                    '600': '#009BA3'
                 },
                 secondary: {
                     DEFAULT: "#76D466",
@@ -76,25 +76,25 @@ module.exports = {
                 "star-mail": "#FDBF20",
                 "form-inputs": "#D1D4E3",
                 dark: {
-                    body: "#000011",
+                    body: "#090C0E",
                     card: {
-                        DEFAULT: "#04041D",
-                        two: "#090927",
-                        shade: "#151541",
+                        DEFAULT: "#151A1F",
+                        two: "#242E37",
+                        shade: "#202830",
                     },
                     text: {
                         DEFAULT: "#D7D7D7",
                         two: "#A0A0A0",
                     },
                     border: {
-                        DEFAULT: "#212146",
+                        DEFAULT: "#28333E",
                         two: "#111133",
                         three: "#13133D",
                         four: "#2B2B65",
                         five: "#292559",
                     },
                     icon: {
-                        DEFAULT: "#23234D",
+                        DEFAULT: "#2B3641",
                     },
                     chart: {
                         "layer-one": "#151541",
@@ -194,10 +194,7 @@ module.exports = {
     },
     variants: {
         extend: {
-            backgroundColor: ['active'],
-            borderColor:['group-focus'],
-            ringColor:['group-focus'],
-            textColor:['group-focus'],
+            backgroundColor: ['active']
         }
     },
     content: [
@@ -210,7 +207,8 @@ module.exports = {
         './resources/**/*.php',
         './resources/**/*.vue',
         './resources/**/*.twig',
-        "./node_modules/flowbite/**/*.js"
+        "./node_modules/flowbite/**/*.js",
+        "./vendor/ramonrietdijk/livewire-tables/resources/**/*.blade.php"
     ],
     plugins: [
         require('flowbite/plugin'),

@@ -19,6 +19,7 @@ class CreateTenantUserImpersonationTokensTable extends Migration
             $table->string('token', 128)->primary();
             $table->string('tenant_id');
             $table->string('user_id');
+            $table->string('impersonator_id')->nullable();
             $table->string('auth_guard');
             $table->string('redirect_url');
             $table->timestamp('created_at');

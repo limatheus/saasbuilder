@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\Auth\FirstLoginController;
+use App\Http\Controllers\Auth\ImpersonationController;
 use Illuminate\Support\Facades\Route;
 use Stancl\Tenancy\Features\UserImpersonation;
 use Stancl\Tenancy\Middleware\InitializeTenancyByDomain;
@@ -51,9 +52,16 @@ Route::middleware([
 
     })->name('logout');
 
-    Route::get('/impersonate/{token}', function ($token) {
-        return UserImpersonation::makeResponse($token);
-    })->name('impersonate');
+    Route::get('/impersonate/{token}', ImpersonationController::class)->name('impersonate');
+
+    Route::get('/teste', function(){
+
+        \App\Models\User::create([
+            'name' => 'teste',
+            'email' => 'teste@mail',
+            'password' => bcrypt('teste')
+        ]);
+    });
 
 
 });

@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Tenant;
+use App\Models\Timezone;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -16,7 +17,6 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // User::factory(10)->create();
-
 
         $this->call([
             TimezonesSeeder::class,
@@ -47,6 +47,19 @@ class DatabaseSeeder extends Seeder
 
             $tenant2 = Tenant::create(['id' => 'omega', 'name' => 'Omega']);
             $tenant2->domains()->create(['domain' => 'omega.' . env('APP_DOMAIN')]);
+
+            $timezone = Timezone::where('value', 'America/Sao_Paulo')->first();
+
+            User::create([
+                'first_name' => 'Matheus',
+                'last_name' => 'Lima',
+                'email' => 'contato@matheuslima.com.br',
+                'password' => bcrypt('password'),
+                'email_verified_at' => now(),
+                'remember_token' => Str::random(10),
+                'locale' => \LaravelLocalization::getCurrentLocale(),
+                'timezone_id' => $timezone->id
+            ]);
         }
     }
 }

@@ -5,13 +5,14 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Enums\UserStatus;
 use App\Models\Traits\HasUuid;
+use App\Models\Traits\ReadOnlyHandler;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use HasUuid, HasFactory, Notifiable;
+    use HasUuid, HasFactory, Notifiable, ReadOnlyHandler;
 
     protected $primaryKey = 'id';
     protected $keyType = 'string';

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\Tenants\ImpersonateController;
 use App\Http\Controllers\Auth\EmailVerificationController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Livewire\Auth\Login;
@@ -55,6 +56,17 @@ foreach (config('tenancy.central_domains') as $domain) {
 
             Route::post('logout', LogoutController::class)
                 ->name('logout');
+        });
+
+        Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], function () {
+
+            Route::get('/', \App\Livewire\Admin\Dashboard\Index::class)->name('index');
+
+            Route::group(['prefix' => 'tenants', 'as' => 'tenants.'], function () {
+                Route::get('/', \App\Livewire\Admin\Tenants\Index::class)->name('index');
+                Route::get('/impersonate/{tenant}', ImpersonateController::class)->name('impersonate');
+            });
+
         });
     });
 
