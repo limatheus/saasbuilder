@@ -9,10 +9,11 @@ use App\Models\Traits\ReadOnlyHandler;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasUuid, HasFactory, Notifiable, ReadOnlyHandler;
+    use HasUuid, HasFactory, Notifiable, HasRoles;
 
     protected $primaryKey = 'id';
     protected $keyType = 'string';

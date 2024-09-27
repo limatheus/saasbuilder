@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Enums\UserStatus;
+use App\Models\Role;
 use App\Models\Tenant;
 use App\Models\Timezone;
 use App\Models\User;
@@ -28,18 +30,32 @@ class DatabaseSeeder extends Seeder
 
         if (tenant()) {
 
-            User::factory(20)->create([
-                'first_name' => function () {
-                    return 'User ';
-                },
-                'last_name' => function () {
-                    return Str::random(5);
-                },
-                'email' => function () {
-                    $username = 'user_' . Str::random(5);
-                    return $username . '@' . tenant()->id . '.' . env('APP_DOMAIN');
-                }
+            $this->call([
+                PermissionsSeeder::class
             ]);
+
+            $timezone = \App\Models\Timezone::where('value', 'America/Sao_Paulo')->first();
+            $role  = Role::where('name', 'super-admin')->first();
+
+            $super_admin = User::create([
+                'first_name' => 'Super',
+                'last_name' => 'Admin '.ucfirst(tenant()->id),
+                'email' => 'admin@' . tenant()->id . '.' . env('APP_DOMAIN'),
+                'password' => bcrypt('password'),
+                'status' => UserStatus::ACTIVE,
+                'remember_token' => Str::random(10),
+                'locale' => \LaravelLocalization::getCurrentLocale(),
+                'timezone_id' => $timezone->id,
+                'email_verified_at' => now(),
+            ]);
+
+            $super_admin->assignRole($role);
+
+            tenant()->update(['owner_id'=> $super_admin->id]);
+
+            $collaborator = Role::where('name', 'collaborator')->first();
+
+            User::factory(19)->create()->each(fn($user) => $user->assignRole($collaborator));
 
         } else {
             $tenant1 = Tenant::create(['id' => 'delta', 'name' => 'Delta']);

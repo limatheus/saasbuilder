@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Tenants;
 use App\Http\Controllers\Controller;
 use App\Models\ImpersonationToken;
 use App\Models\Tenant;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
@@ -16,10 +17,10 @@ class ImpersonateController extends Controller
     public function __invoke(Tenant $tenant): RedirectResponse
     {
         $user = $tenant->run(function ($tenant) {
-            return \App\Models\User::first();
+            return User::findOrFail($tenant->owner_id);
         });
 
-        $token =ImpersonationToken::create([
+        $token = ImpersonationToken::create([
             'tenant_id' => $tenant->id,
             'user_id' => $user->id,
             'impersonator_id' => auth()->user()->id,

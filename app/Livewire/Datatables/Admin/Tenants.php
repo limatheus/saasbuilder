@@ -27,7 +27,7 @@ class Tenants extends LivewireDatatable
 
             CustomColumn::name('id')
                 ->label(__('Actions'))
-                ->view('components.actions-table', 'tenants', ['impersonate'], 'name')
+                ->view('components.actions-table', 'admin.tenants', ['impersonate'], 'name')
         ];
     }
 }

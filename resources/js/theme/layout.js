@@ -47,10 +47,14 @@ function setActiveMenu() {
     let currentPath =
         location.pathname == "/" ? "index.html" : location.pathname.substring(1);
     currentPath = currentPath.substring(currentPath.lastIndexOf("/") + 1);
+
+    console.log(currentPath)
     if (currentPath && document.getElementById("navbar-nav")) {
         let a = document
             .getElementById("navbar-nav")
             .querySelector(`[href="${currentPath}"]`);
+
+        console.log(a)
 
         if (a) {
             a.classList.add("active");

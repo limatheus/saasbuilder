@@ -24,6 +24,6 @@ if (!function_exists('generateNanoId')) {
 if (!function_exists('isImpersonated')) {
     function isImpersonated()
     {
-        return (bool) request()->cookie('impersonator_id');
+        return session()->has('impersonator_id');
     }
 }

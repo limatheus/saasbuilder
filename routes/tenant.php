@@ -42,11 +42,19 @@ Route::middleware([
 
     Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => 'auth'], function () {
         Route::get('/', \App\Livewire\Tenant\Dashboard\Index::class)->name('index');
+
+        Route::group(['prefix' => 'users', 'as' => 'users.'], function () {
+            Route::get('/', \App\Livewire\Tenant\Users\Index::class)->name('index');
+            Route::get('/view/{user}', \App\Livewire\Tenant\Users\View::class)->name('view');
+        });
+
     });
 
 
-    Route::get('/auth/logout', function () {
+    Route::post('/auth/logout', function () {
         auth()->logout();
+
+        session()->flush();
 
         return redirect('/');
 

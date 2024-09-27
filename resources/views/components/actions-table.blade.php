@@ -19,7 +19,7 @@
             @keydown.escape="open = false"
         >
             @if(in_array('impersonate', $actions))
-                <li><a href="{{route('admin.'.$resource.'.impersonate', $value)}}" target="_blank"
+                <li><a href="{{route($resource.'.impersonate', $value)}}" target="_blank"
                        class="px-2 py-1 text-xs btn b-solid btn-primary-solid btn-sm">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-5 w-5">
                             <path fill="#ffffff"
@@ -30,21 +30,21 @@
             @endif()
 
                 @if(in_array('grade', $actions))
-                <li><a href="{{route('admin.'.$resource.'.grade', $value)}}"
+                <li><a href="{{route($resource.'.grade', $value)}}"
                        class="px-2 py-1 text-xs btn-primary btn-sm">
                         <box-icon name="list-ul" class="fill-current"></box-icon>
                     </a></li>
             @endif()
 
             @if(in_array('view', $actions))
-                <li><a href="{{route('admin.'.$resource.'.view', $value)}}"
+                <li><a href="{{route($resource.'.view', $value)}}"
                        class="px-2 py-1 text-xs btn-primary btn-sm">
                         <box-icon name="search" class="fill-current"></box-icon>
                     </a></li>
             @endif()
             @if(in_array('edit', $actions))
                 <li>
-                    <a href="{{route('admin.'.$resource.'.edit', $value)}}" class="px-2 py-1 text-xs bg-blue-500 border-blue-500 btn-primary btn-sm">
+                    <a href="{{route($resource.'.edit', $value)}}" class="px-2 py-1 text-xs bg-blue-500 border-blue-500 btn-primary btn-sm">
                         <box-icon name="pencil" class="fill-current"></box-icon>
                     </a>
                 </li>

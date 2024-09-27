@@ -28,8 +28,8 @@ class ImpersonationController extends Controller
         Auth::guard($token->auth_guard)->loginUsingId($token->user_id);
 
         if($token->impersonator_id){
-            //session()->put('impersonator_id', $token->impersonator_id);
-            Cookie::queue('impersonator_id', $token->impersonator_id, 2628000);
+            session()->put('impersonator_id', $token->impersonator_id);
+            //Cookie::queue('impersonator_id', $token->impersonator_id, 2628000);
         }
 
         $token->delete();
